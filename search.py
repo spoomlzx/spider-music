@@ -8,13 +8,15 @@ from time import sleep
 search = sys.argv[1]
 #task_path = sys.argv[2]
 task_path = search + ".json"
+
 if not task_path:
     task_path = "tasks.json"
 
-url = 'http://tool.liumingye.cn/music/?page=audioPage&type=migu&name='+search
+url = 'http://tool.liumingye.cn/music/?page=audioPage&type=YQB&name='+search
 #url = 'http://tool.liumingye.cn/music/?page=audioPage&type=migu&name='+search
 
 dr = webdriver.Chrome()
+dr.set_window_size(750,1080)
 dr.get(url)
 dr.implicitly_wait(5)
 

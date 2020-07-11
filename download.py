@@ -21,7 +21,7 @@ def downloadfile(url, path):
                 # print(r.headers)
                 print('-' * 30)
                 print("下载文件基本信息:")
-                print("文件类型:", r.headers["Content-Type"])
+                #print("文件类型:", r.headers["Content-Type"])
                 filesize = r.headers["Content-Length"]
                 print("文件大小:", filesize, "bytes")
                 print("下载地址:", url)
@@ -51,6 +51,11 @@ def downloadfile(url, path):
             if os.path.exists(loading_path):
                 os.remove(loading_path)
 
+def downloadlrc(url, path):
+    r = requests.get(url) 
+    with open(download_path, "wb") as code:
+     code.write(r.content)
+
 path = sys.argv[1] or "data"
 task_path = path+".json"
 if not os.path.exists(path):
@@ -68,6 +73,8 @@ for task in tasks:
     if download_url:
         if os.path.exists(download_path):
             print("skip.")
+        elif ".lrc" in download_url:
+            downloadlrc(download_url, download_path)
         else:
             downloadfile(download_url, download_path)
             # urllib.request.urlretrieve(download_url, download_path)
